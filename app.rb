@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra/activerecord'
+require 'pry'
 
 require_relative 'models/contact'
 
@@ -20,6 +21,23 @@ before do
   end
 end
 
+
+def length
+  (Contact.all.length.to_f / 3).ceil
+end
+
 get '/' do
+  redirect '/contacts'
+end
+
+get '/contacts' do
+  page_num = params[:page] ||= 1
+
+  @contacts = Contact.limit(3).offset((page_num.to_i * 3 ) - 3)
   erb :index
+end
+
+get '/contacts/:id' do
+  @contact = Contact.find(params[:id])
+  erb :show
 end
