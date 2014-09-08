@@ -11,4 +11,7 @@
   <% end %>
 </ul>
 
-<%= will_paginate @contacts %>
+Current page : <%= params[:page] %></br></br>
+<% for i in (1..length) %>
+<a href="/contacts?page=<%= i %>"><%= i %></a>
+<% end %>

@@ -1,8 +1,8 @@
 <h2> Add New Contact </h2>
-<form style="margin-top :30px" method="post" name="add_contact" action="/new">
-  <label for="firstname">First Name: </label><input type="text" name="first_name"/></br>
-  <label for="lastname">Last Name: </label><input type="text" name="last_name"/></br>
-  <label for="phone_number">Phone Number: </label><input type="text" name="phone_number"/></br>
+<form style="margin-top :30px" method="post" name="add_contact" action="/new" onsubmit="return validateForm()">
+  <label for="firstname">First Name: </label><input class="req" type="text" name="first_name"/></br>
+  <label for="lastname">Last Name: </label><input class="req" type="text" name="last_name"/></br>
+  <label for="phone_number">Phone Number: </label><input class="req" type="text" name="phone_number"/></br>
   <input type="submit" value="Submit"/>
 
 </form>

@@ -24,7 +24,6 @@ before do
   end
 end
 
-
 def length
   (Contact.all.length.to_f / 3).ceil
 end
@@ -36,11 +35,10 @@ end
 get '/contacts' do
   page_num = params[:page] ||= 1
   if params[:search] == nil
-    # @contacts = Contact.limit(3).offset((page_num.to_i * 3 ) - 3)
-
-    @contacts = Contact.all.paginate(page: params[:page], per_page: 3)
+    @contacts = Contact.limit(3).offset((page_num.to_i * 3 ) - 3)
+    # @contacts = Contact.all.paginate(page: params[:page], per_page: 3)
   else
-    search = "%#{params[:search].gsub(' ','')}%"
+    search = "%#{params[:search].gsub(' ','+')}%"
     @contacts = Contact.limit(3).offset((page_num.to_i * 3 ) - 3).where("CONCAT(first_name, last_name) ilike :search ", { search: search })
   end
   erb :index
@@ -56,16 +54,9 @@ get '/new' do
 end
 
 post '/new' do
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :phone_number, presence: true
-
   first_name = params[:first_name]
   last_name = params[:last_name]
   phone_number = params[:phone_number]
-
-
-
   Contact.create_contact(first_name, last_name, phone_number)
   redirect '/contacts'
 end
