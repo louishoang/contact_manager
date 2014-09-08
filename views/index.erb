@@ -1,3 +1,4 @@
+<% @search_active = true %>
 <h1>Contacts</h1>
 
 <ul>
@@ -10,7 +11,4 @@
   <% end %>
 </ul>
 
-Current page : <%= params[:page] %></br></br>
-<% for i in (1..length) %>
-<a href="/contacts?page=<%= i %>"><%= i %></a>
-<% end %>
+<%= will_paginate @contacts %>

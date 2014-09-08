@@ -7,10 +7,17 @@
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
-    <form name="search" action="/contacts?search=<%= params[:search]%>" method="get">
-      <input type="search" name="search"/>
-      <input type="submit" value="Search"/>
-    </form>
+    <div class="nav" style="margin: 20px 0px 20px 20px">
+      <a href="/">Home</a> || <a href="/new">Add New Contact</a>
+    </div>
+    <% if @search_active %>
+      <div>
+        <form name="search" action="/contacts?search=<%= params[:search]%>" method="get">
+              <input type="search" name="search"/>
+              <input type="submit" value="Search"/>
+        </form>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
