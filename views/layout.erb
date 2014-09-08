@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
+    <form name="search" action="/contacts?search=<%= params[:search]%>" method="get">
+      <input type="search" name="search"/>
+      <input type="submit" value="Search"/>
+    </form>
     <%= yield %>
   </body>
 </html>

@@ -33,7 +33,12 @@ end
 get '/contacts' do
   page_num = params[:page] ||= 1
 
-  @contacts = Contact.limit(3).offset((page_num.to_i * 3 ) - 3)
+  if params[:search] == nil
+    @contacts = Contact.limit(3).offset((page_num.to_i * 3 ) - 3)
+  else
+    search = "%#{params[:search].gsub(' ','')}%"
+    @contacts = Contact.limit(3).offset((page_num.to_i * 3 ) - 3).where("CONCAT(first_name, last_name) ilike :search ", { search: search })
+  end
   erb :index
 end
 
